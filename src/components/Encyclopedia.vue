@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="encyclopedia">
     <h2 class="page-title">📚 数据百科</h2>
     <p class="page-sub">由 CafeMaker API 提供 · 50 副本 / 760 任务 / 2228 成就 · 实时数据</p>
@@ -67,9 +67,13 @@ import { ref, computed } from 'vue'
 import { instanceData } from '@/data/instances'
 import questsRaw from '@/data/quests.json'
 import achievementsRaw from '@/data/achievements.json'
+import itemsRaw from '@/data/items.json'
+import actionsRaw from '@/data/actions.json'
 
 const questData = (questsRaw as any[]).map((q: any) => ({ id: q.id, name: q.name }))
 const achievementData = (achievementsRaw as any[]).map((a: any) => ({ id: a.id, name: a.name }))
+const itemsData = (itemsRaw as any[]).map((i: any) => ({ id: i.id, name: i.name }))
+const actionsData = (actionsRaw as any[]).map((a: any) => ({ id: a.id, name: a.name }))
 
 const activeSub = ref('instances')
 const query = ref('')
@@ -81,14 +85,18 @@ const pageSize = 30
 const subTabs = [
   { key: 'instances', label: '🗺️ 副本', count: instanceData.length, icon: '' },
   { key: 'quests', label: '📋 任务', count: questData.length, icon: '' },
-  { key: 'achievements', label: '🏆 成就', count: achievementData.length, icon: '' }
+  { key: 'achievements', label: '🏆 成就', count: achievementData.length, icon: '' },
+  { key: 'items', label: '🎒 物品', count: itemsData.length, icon: '' },
+  { key: 'actions', label: '⚡ 技能', count: actionsData.length, icon: '' }
 ]
 
 const currentTab = computed(() => subTabs.find(t => t.key === activeSub.value)!)
 const currentData = computed(() => {
   if (activeSub.value === 'instances') return instanceData
   if (activeSub.value === 'quests') return questData
-  return achievementData
+  if (activeSub.value === 'achievements') return achievementData
+  if (activeSub.value === 'items') return itemsData
+  return actionsData
 })
 
 const filtered = computed(() => {
