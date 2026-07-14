@@ -1,53 +1,63 @@
 ﻿<template>
   <div class="encyclopedia">
     <h2 class="page-title">📚 数据百科</h2>
-    <p class="page-sub">由 CafeMaker API 提供的 FFXIV 游戏数据 · 支持搜索与筛选</p>
+    <p class="page-sub">由 CafeMaker API 提供 · 50 副本 / 760 任务 / 2228 成就 · 实时数据</p>
+
+    <nav class="sub-tabs">
+      <button v-for="t in subTabs" :key="t.key" class="sub-tab" :class="{ active: activeSub === t.key }" @click="activeSub = t.key">
+        {{ t.icon }} {{ t.label }} <span class="count">({{ t.count }})</span>
+      </button>
+    </nav>
 
     <div class="controls">
-      <input v-model="query" type="text" placeholder="搜索副本名称 / 英文名..." class="search-input" />
-      <select v-model="patchFilter" class="select-filter">
-        <option value="">全部版本</option>
-        <option value="2">2.x 重生之境</option>
-        <option value="3">3.x 苍穹之禁城</option>
-        <option value="4">4.x 红莲之狂潮</option>
-        <option value="5">5.x 暗影之逆焰</option>
-        <option value="6">6.x 晓月之终途</option>
-        <option value="7">7.x 金曦之遗辉</option>
-      </select>
-      <span class="result-count">{{ filtered.length }} / {{ instanceData.length }} 个副本</span>
+      <input v-model="query" type="text" :placeholder="'搜索' + currentTab.label + '...'" class="search-input" />
+      <span class="result-count">{{ filtered.length }} / {{ currentData.length }}</span>
     </div>
 
     <div class="table-wrap">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th @click="sortBy('id')" class="sortable">ID {{ sortIcon('id') }}</th>
-            <th @click="sortBy('name')" class="sortable">中文名称 {{ sortIcon('name') }}</th>
-            <th @click="sortBy('name_en')" class="sortable">英文名称 {{ sortIcon('name_en') }}</th>
-            <th @click="sortBy('name_ja')" class="sortable">日文名称 {{ sortIcon('name_ja') }}</th>
-            <th @click="sortBy('level')" class="sortable">等级 {{ sortIcon('level') }}</th>
-            <th @click="sortBy('timeLimit')" class="sortable">时限 {{ sortIcon('timeLimit') }}</th>
-            <th @click="sortBy('patch')" class="sortable">版本 {{ sortIcon('patch') }}</th>
-          </tr>
-        </thead>
+      <!-- 副本表格 -->
+      <table v-if="activeSub === 'instances'" class="data-table">
+        <thead><tr>
+          <th @click="sortBy('id')" class="sortable">ID {{ sortIcon('id') }}</th>
+          <th @click="sortBy('name')" class="sortable">名称 {{ sortIcon('name') }}</th>
+          <th @click="sortBy('name_en')" class="sortable">英文 {{ sortIcon('name_en') }}</th>
+          <th @click="sortBy('level')" class="sortable">等级 {{ sortIcon('level') }}</th>
+          <th @click="sortBy('timeLimit')" class="sortable">时限 {{ sortIcon('timeLimit') }}</th>
+        </tr></thead>
         <tbody>
-          <tr v-for="inst in paged" :key="inst.id">
-            <td class="cell-id">{{ inst.id }}</td>
-            <td class="cell-name">{{ inst.name }}</td>
-            <td class="cell-en">{{ inst.name_en }}</td>
-            <td class="cell-ja">{{ inst.name_ja }}</td>
-            <td class="cell-num">Lv.{{ inst.level }}</td>
-            <td class="cell-num">{{ inst.timeLimit }}min</td>
-            <td class="cell-num">{{ inst.patch }}.x</td>
+          <tr v-for="d in paged" :key="d.id">
+            <td class="cell-id">{{ d.id }}</td>
+            <td class="cell-name">{{ d.name }}</td>
+            <td class="cell-en">{{ d.name_en }}</td>
+            <td class="cell-num">{{ d.level ? 'Lv.' + d.level : '-' }}</td>
+            <td class="cell-num">{{ d.timeLimit }}min</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- 任务表格 -->
+      <table v-else class="data-table">
+        <thead><tr>
+          <th @click="sortBy('id')" class="sortable">ID {{ sortIcon('id') }}</th>
+          <th @click="sortBy('name')" class="sortable">任务名称 {{ sortIcon('name') }}</th>
+        </tr></thead>
+        <tbody>
+          <tr v-for="d in paged" :key="d.id">
+            <td class="cell-id">{{ d.id }}</td>
+            <td class="cell-name">{{ d.name }}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div v-if="totalPages > 1" class="pagination">
-      <button :disabled="page <= 1" @click="page--">← 上一页</button>
+      <button :disabled="page <= 1" @click="page--">←</button>
       <span>{{ page }} / {{ totalPages }}</span>
-      <button :disabled="page >= totalPages" @click="page++">下一页 →</button>
+      <button :disabled="page >= totalPages" @click="page++">→</button>
+    </div>
+
+    <div class="attribution">
+      数据来源：<a href="https://cafemaker.wakingsands.com" target="_blank">CafeMaker (wakingsands.com)</a>
     </div>
   </div>
 </template>
@@ -55,25 +65,39 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { instanceData } from '@/data/instances'
+import questsRaw from '@/data/quests.json'
+import achievementsRaw from '@/data/achievements.json'
 
+const questData = (questsRaw as any[]).map((q: any) => ({ id: q.id, name: q.name }))
+const achievementData = (achievementsRaw as any[]).map((a: any) => ({ id: a.id, name: a.name }))
+
+const activeSub = ref('instances')
 const query = ref('')
-const patchFilter = ref('')
 const sortField = ref('id')
 const sortDir = ref(1)
 const page = ref(1)
-const pageSize = 20
+const pageSize = 30
+
+const subTabs = [
+  { key: 'instances', label: '🗺️ 副本', count: instanceData.length, icon: '' },
+  { key: 'quests', label: '📋 任务', count: questData.length, icon: '' },
+  { key: 'achievements', label: '🏆 成就', count: achievementData.length, icon: '' }
+]
+
+const currentTab = computed(() => subTabs.find(t => t.key === activeSub.value)!)
+const currentData = computed(() => {
+  if (activeSub.value === 'instances') return instanceData
+  if (activeSub.value === 'quests') return questData
+  return achievementData
+})
 
 const filtered = computed(() => {
-  let list = instanceData
-  if (patchFilter.value) {
-    list = list.filter(i => i.patch === Number(patchFilter.value))
-  }
+  let list = currentData.value as any[]
   if (query.value.trim()) {
     const q = query.value.toLowerCase()
-    list = list.filter(i =>
-      i.name.toLowerCase().includes(q) ||
-      i.name_en.toLowerCase().includes(q) ||
-      i.name_ja.includes(q)
+    list = list.filter((d: any) =>
+      (d.name || '').toLowerCase().includes(q) ||
+      (d.name_en || '').toLowerCase().includes(q)
     )
   }
   list = [...list].sort((a: any, b: any) => {
@@ -85,11 +109,8 @@ const filtered = computed(() => {
   return list
 })
 
-const totalPages = computed(() => Math.ceil(filtered.value.length / pageSize))
-const paged = computed(() => {
-  const start = (page.value - 1) * pageSize
-  return filtered.value.slice(start, start + pageSize)
-})
+const totalPages = computed(() => Math.max(1, Math.ceil(filtered.value.length / pageSize)))
+const paged = computed(() => filtered.value.slice((page.value - 1) * pageSize, page.value * pageSize))
 
 function sortBy(field: string) {
   if (sortField.value === field) { sortDir.value *= -1 }
@@ -106,44 +127,38 @@ function sortIcon(field: string) {
 <style scoped>
 .encyclopedia { flex: 1; overflow-y: auto; padding: 24px 32px; }
 .page-title { font-size: 1.5rem; color: var(--accent); margin-bottom: 4px; }
-.page-sub { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 20px; }
+.page-sub { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 16px; }
 
-.controls { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
-.search-input {
-  flex: 1; min-width: 200px; padding: 10px 14px; border: 1px solid var(--border);
-  border-radius: var(--radius); background: var(--bg); color: var(--text); font-size: 0.9rem; outline: none;
-  transition: border-color 0.2s;
-}
+.sub-tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.sub-tab { padding: 8px 16px; border: 1px solid var(--border); border-radius: var(--radius) var(--radius) 0 0; background: transparent; color: var(--text-dim); font-size: 0.85rem; cursor: pointer; transition: all 0.15s; border-bottom: none; }
+.sub-tab:hover { color: var(--text); }
+.sub-tab.active { color: var(--accent); background: var(--bg-card); border-color: var(--accent); }
+.count { font-size: 0.72rem; opacity: 0.7; }
+
+.controls { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; }
+.search-input { flex: 1; min-width: 200px; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--text); font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
 .search-input:focus { border-color: var(--accent); }
-.select-filter {
-  padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius);
-  background: var(--bg); color: var(--text); font-size: 0.9rem; outline: none;
-}
 .result-count { font-size: 0.85rem; color: var(--text-dim); white-space: nowrap; }
 
-.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
-.data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-.data-table th {
-  background: var(--bg-card); color: var(--accent); padding: 10px 12px; text-align: left;
-  border-bottom: 2px solid var(--border); white-space: nowrap; user-select: none;
-}
-.sortable { cursor: pointer; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); max-height: 60vh; overflow-y: auto; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+.data-table th { background: var(--bg-card); color: var(--accent); padding: 9px 12px; text-align: left; border-bottom: 2px solid var(--border); white-space: nowrap; position: sticky; top: 0; z-index: 1; }
+.sortable { cursor: pointer; user-select: none; }
 .sortable:hover { color: #fff; }
-.data-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+.data-table td { padding: 7px 12px; border-bottom: 1px solid var(--border); }
 .data-table tr:hover td { background: var(--bg-card-hover); }
-.cell-id { color: var(--text-dim); width: 40px; }
+.cell-id { color: var(--text-dim); width: 60px; font-family: monospace; }
 .cell-name { font-weight: 600; }
 .cell-en { color: var(--text-dim); font-style: italic; }
-.cell-ja { color: var(--text-dim); font-size: 0.8rem; }
-.cell-num { text-align: center; color: var(--text-dim); }
+.cell-num { text-align: center; color: var(--text-dim); width: 80px; }
 
-.pagination { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 16px; }
-.pagination button {
-  padding: 8px 16px; border: 1px solid var(--border); border-radius: var(--radius);
-  background: var(--bg-card); color: var(--text); cursor: pointer; transition: all 0.15s;
-}
+.pagination { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 14px; }
+.pagination button { padding: 8px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); color: var(--text); cursor: pointer; transition: all 0.15s; }
 .pagination button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 .pagination button:disabled { opacity: 0.4; cursor: default; }
 
-@media (max-width: 768px) { .encyclopedia { padding: 16px; } }
+.attribution { margin-top: 20px; text-align: center; font-size: 0.78rem; color: var(--text-dim); }
+.attribution a { color: var(--accent); }
+
+@media (max-width: 768px) { .encyclopedia { padding: 16px; } .sub-tab { font-size: 0.7rem; padding: 6px 10px; } }
 </style>
