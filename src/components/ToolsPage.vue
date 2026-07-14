@@ -107,6 +107,14 @@ const macros: MacroTemplate[] = [
   { id:'lb-healer', name:'治疗 LB3', category:'battle', generate:()=>'/p ★ H1 准备释放 治疗 LB3！全员集合！<se.5>' },
   { id:'lb-melee', name:'近战 LB3', category:'battle', generate:()=>'/p ★ D1 准备释放 近战 LB3！<se.5>' },
   { id:'party-mitigation', name:'团队减伤链', category:'battle', generate:()=>'/p ★ 减伤链：\n/p ① MT 30%减伤\n/p ② ST 团队减伤\n/p ③ H1 节制/命运之轮\n/p ④ H2 野战治疗阵\n/p ⑤ 全员小减伤 <se.6>' },
+  { id:'hunt-train', name:'狩猎车通知', category:'battle', generate:()=>'/sh ★ A怪狩猎车即将发车！/p 线路：<flag> → <flag> / 请上坐骑跟随！<se.3>' },
+  { id:'hunt-call', name:'S怪通知', category:'battle', generate:()=>'/sh ★ S级恶名精英：<t> 出现！/p 位置：<pos> / 请速来！<se.12>' },
+  { id:'treasure-map', name:'宝图招募', category:'battle', generate:()=>'/p ★ 宝物库招募：每人2张G15宝图 / 已有X人 / 位置<pos> / 轮流开图 <se.1>' },
+  { id:'waymark-save', name:'保存标记 (Slot 1)', category:'battle', generate:()=>'/waymark save 1' },
+  { id:'waymark-load', name:'载入标记 (Slot 1)', category:'battle', generate:()=>'/waymark load 1' },
+  { id:'ready-check', name:'就绪确认+倒计时', category:'battle', generate:()=>'/readycheck <wait.3>\n/p 确认完毕！<countdown:15> 后开怪！<se.1>' },
+  { id:'pf-clear', name:'PF通关目标', category:'battle', generate:()=>'/p ★ 目标：通关 / 练习为主 / 一饭一灭 / 请多包容 <se.2>' },
+  { id:'pf-farm', name:'PF周回目标', category:'battle', generate:()=>'/p ★ 目标：周回Farm / 稳过优先 / 2灭散 / 请确认机制 <se.2>' },
 
   // ===== 职业专属 =====
   { id:'tank-invuln', name:'坦克无敌通知', category:'role', generate:()=>'/p ★ 使用无敌技能！\n/p 治疗请停止加血（接下来使用自疗） <se.4>' },
@@ -117,6 +125,13 @@ const macros: MacroTemplate[] = [
   { id:'ast-cards', name:'占星发卡', category:'role', generate:()=>'/p ★ 发卡中：/p 近战卡→<1> / 远程卡→<3> / 回复卡→<7>\n/p 占卜将在30秒后 <se.1>' },
   { id:'dancer-partner', name:'舞者舞伴', category:'role', generate:()=>'/p ★ 舞伴已设置：<2> /p ★ 标准Finish + 技巧Finish 即将爆发 <se.5>' },
   { id:'sch-chain', name:'学者连环计', category:'role', generate:()=>'/p ★ 连环计就绪！10秒后释放！请准备爆发！<se.3>\n/wait 10\n/p ★ 连环计已释放！打入爆发！<se.5>' },
+  { id:'drg-litany', name:'龙骑战斗连祷', category:'role', generate:()=>'/p ★ 战斗连祷即将释放！请准备爆发！<se.3>\n/wait 3\n/p ★ 战斗连祷！10%暴击率提升！<se.5>' },
+  { id:'rdm-verraise', name:'赤魔复活链', category:'role', generate:()=>'/ac "连续咏唱" <wait.2>\n/ac "赤复活" <t>\n/ac "赤复活" <tt>\n/p 赤复活已使用 <se.8>' },
+  { id:'tank-stance-on', name:'坦克盾姿切换', category:'role', generate:()=>'/ac "钢铁信念" <wait.1>\n/p ★ 盾姿ON - 仇恨由我负责！<se.4>' },
+  { id:'tank-stance-off', name:'坦克盾姿关闭', category:'role', generate:()=>'/ac "钢铁信念" <wait.1>\n/p ★ 盾姿OFF - ST模式 <se.6>' },
+  { id:'brd-songs', name:'诗人歌曲宏', category:'role', generate:()=>'/ac "贤者的叙事谣" <wait.43>\n/ac "放浪神的小步舞曲" <wait.43>\n/ac "军神的赞美歌" <wait.43>\n/echo ★ 第三首歌结束，准备重新循环！<se.1>' },
+  { id:'smn-bahamut', name:'召唤巴哈姆特', category:'role', generate:()=>'/ac "龙神附体" <wait.1>\n/ac "星极脉冲" <wait.2>\n/ac "星极脉冲" <wait.2>\n/ac "星极脉冲" <wait.2>\n/ac "星极脉冲" <wait.2>\n/ac "死星核爆"' },
+  { id:'gnb-continuation', name:'绝枪续剑宏', category:'role', generate:()=>'/ac "烈牙" <wait.2>\n/ac "续剑" <wait.2>\n/ac "猛兽爪" <wait.2>\n/ac "续剑" <wait.2>\n/ac "凶禽爪" <wait.2>\n/ac "续剑"' },
 
   // ===== 生产采集 =====
   { id:'craft-80dur', name:'制作宏 (80耐久)', category:'craft', generate:()=>'/ac "坚信" <wait.3>\n/ac "崇敬" <wait.2>\n/ac "长期俭约" <wait.2>\n/ac "坯料制作" <wait.3>\n/ac "坯料制作" <wait.3>\n/ac "加工" <wait.3>\n/ac "中级加工" <wait.3>\n/ac "上级加工" <wait.3>\n/ac "工匠的神技" <wait.3>\n/ac "比尔格的祝福" <wait.3>\n/ac "模范制作" <wait.3>' },
@@ -125,6 +140,11 @@ const macros: MacroTemplate[] = [
   { id:'craft-quick-synth', name:'简易制作连打', category:'craft', generate:()=>'/ac "简易制作" <wait.3>\n/ac "简易制作" <wait.3>\n/ac "简易制作" <wait.3>\n/ac "简易制作" <wait.3>\n/ac "简易制作" <wait.3>\n/ac "简易制作" <wait.3>' },
   { id:'craft-food', name:'食物+药水快捷', category:'craft', generate:()=>'/macroicon "高山茶"\n/merror off\n/item "高山茶" <wait.1>\n/item "顶级智力之幻药" <wait.1>' },
   { id:'gather-cordials', name:'采集强心剂', category:'craft', generate:()=>'/ac "开拓者之手" <wait.2>\n/ac "天赐的收成" <wait.2>\n/ac "集中检查"' },
+  { id:'craft-expert', name:'专家制作宏 (通用)', category:'craft', generate:()=>'/ac "坚信" <wait.3>\n/ac "崇敬" <wait.2>\n/ac "长期俭约" <wait.2>\n/ac "坯料制作" <wait.3>\n/ac "坯料制作" <wait.3>\n/ac "加工" <wait.3>\n/ac "中级加工" <wait.3>\n/ac "上级加工" <wait.3>\n/ac "工匠的神技" <wait.3>\n/ac "比尔格的祝福" <wait.3>\n/ac "集中加工" <wait.3>\n/ac "模范制作" <wait.3>' },
+  { id:'craft-hq-prep', name:'HQ半成品准备', category:'craft', generate:()=>'/ac "坚信" <wait.3>\n/ac "崇敬" <wait.2>\n/ac "俭约" <wait.2>\n/ac "加工" <wait.3>\n/ac "中级加工" <wait.3>\n/ac "上级加工" <wait.3>\n/ac "比尔格的祝福" <wait.3>\n/ac "模范制作" <wait.3>' },
+  { id:'desynth', name:'批量分解', category:'craft', generate:()=>'/macroicon "分解"\n/merror off\n/ac "分解" <wait.2>\n/ac "分解" <wait.2>\n/ac "分解" <wait.2>\n/ac "分解" <wait.2>' },
+  { id:'gather-rotation', name:'采集循环 (传说点)', category:'craft', generate:()=>'/ac "开拓者之手" <wait.2>\n/ac "天赐的收成" <wait.2>\n/ac "集中检查" <wait.2>\n/ac "天赐的收成" <wait.2>\n/ac "天赐的收成" <wait.2>' },
+  { id:'materia-extract', name:'批量精炼', category:'craft', generate:()=>'/macroicon "精炼"\n/merror off\n/ac "精炼" <wait.3>\n/ac "精炼" <wait.3>\n/ac "精炼" <wait.3>\n/ac "精炼" <wait.3>' },
 
   // ===== 日常便利 =====
   { id:'mount-roulette', name:'随机坐骑', category:'qol', generate:()=>'/macroicon "随机坐骑"\n/mount "随机坐骑"' },
@@ -144,7 +164,12 @@ const macros: MacroTemplate[] = [
   { id:'afk', name:'暂离通知', category:'social', generate:()=>'/p 暂时离开一下，3分钟后回来！(￣▽￣)ゞ\n/away <se.9>' },
   { id:'goodbye', name:'告别退队', category:'social', generate:()=>'/p 辛苦了！我先退队了~\n/p 大家加油！ヽ(●´∀`●)ﾉ\n/leave' },
   { id:'cheer', name:'加油打气', category:'social', generate:()=>'/p 加油！我们可以的！┗(｀O´)┛\n/p 再来一把！<se.11>' },
-  { id:'sorry', name:'道歉宏', category:'social', generate:()=>'/p 啊抱歉！我的锅！(>_<)\n/p 下次注意！<se.10>' }
+  { id:'sorry', name:'道歉宏', category:'social', generate:()=>'/p 啊抱歉！我的锅！(>_<)\n/p 下次注意！<se.10>' },
+  { id:'fc-recruit', name:'部队招募', category:'social', generate:()=>'/sh ★ 【XXX】部队招募新成员！/p 欢迎新老玩家 / 活跃部队 / 每日buff / 潜水艇探险 / 有意私聊 <se.7>' },
+  { id:'cwls-recruit', name:'跨服通讯贝招募', category:'social', generate:()=>'/sh ★ 跨服通讯贝招募：高难固定队 / 招募【职业】一名 / 要求零式通关经验 / 晚间活动 / 私聊详谈 <se.3>' },
+  { id:'party-finder-desc', name:'PF描述模板', category:'social', generate:()=>'/p 【副本名称】练习/周回\n/p ■ 目标：通关/Farm\n/p ■ 攻略：ぬけまる/菓子\n/p ■ 语音：Discord/不需要\n/p ■ 饭药：有/无\n/p ■ 灭团：3灭散\n/p 请确认机制后再申请！' },
+  { id:'wedding', name:'婚礼祝福', category:'social', generate:()=>'/sh ★ 恭喜 <t> 和伴侣喜结连理！(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧\n/p 祝你们在艾欧泽亚的旅途永远幸福！<se.7>' },
+  { id:'newbie-help', name:'豆芽帮助', category:'social', generate:()=>'/p 看你头上还有豆芽~有什么需要帮忙的吗？\n/p 不懂的机制可以问我！(｡•̀ᴗ-)✧ <se.7>' },
 ]
 
 const filteredMacros = computed(() => {
