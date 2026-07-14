@@ -483,6 +483,317 @@ export const dailyGuides: DailyGuide[] = [
       '花 Gil 买装备比刷副本快得多。满级后花 100-200 万买一套 HQ 新式装就可以直接参与零式'
     ]
   }
+
+,
+
+  // ==================== 深层迷宫 ====================
+  {
+    id: 'deepdungeon-potd',
+    title: '死者宫殿 (PotD) 完全攻略',
+    category: 'deepdungeon',
+    icon: '🏚️',
+    summary: '死者宫殿（Palace of the Dead）是 FFXIV 首个深层迷宫，B1-B200 层。完成 B50 后可获得死灵术士称号。是练副职和获取稀有道具的好地方。',
+    sections: [
+      { title: '基础规则', content: '死者宫殿使用独立的等级系统（从1级开始），不需要外部装备。所有玩家在内部装备强度取决于"武器强化值"和"防具强化值"。', items: [
+        { label: '强化值系统', description: '开银宝箱随机获得武器/防具强化值（+1到+3）。最高武器+99、防具+99。', highlight: '核心机制' },
+        { label: '复活机制', description: '全灭=重置当前10层。单人全灭=从头再来（死灵挑战核心难点）。' },
+        { label: '魔陶石', description: '击杀怪物概率掉落。石化（最有用）、减少敌人、探地图三种。', highlight: '神器' }
+      ]},
+      { title: '层数与奖励', content: '每10层一个BOSS。B50/B100各获得一个剧情成就。', items: [
+        { label: 'B1-B50', description: '主线剧情。完成后解锁B51-B200。推荐等级30+。' },
+        { label: 'B51-B100', description: '深层。银宝箱出G10-G15宝图材料，稳定收入来源。' },
+        { label: 'B51-B60练级', description: '60级以下最快练级方式。一次约15分钟。', highlight: '练级圣地' },
+        { label: '死灵术士', description: '单人挑战B200获得。全服达成率<1%，终极挑战。', highlight: '终极称号' }
+      ]},
+      { title: '关键陷阱', content: '陷阱是死灵挑战的最大敌人。', items: [
+        { label: '青蛙陷阱', description: '变成青蛙30秒。死灵挑战最致命的陷阱。', highlight: '最危险' },
+        { label: '地雷陷阱', description: '爆炸大伤害。贴墙走可避开大部分。' },
+        { label: '寂静陷阱', description: '封印技能30秒。在战斗中极危险。' },
+        { label: '诱饵陷阱', description: '召唤大量怪物围攻。立刻用魔陶石或逃跑。' }
+      ]}
+    ],
+    tips: [
+      '死灵挑战非常困难，建议先在B51-B100组队积累经验',
+      '战士/骑士最适合单刷（自疗+减伤），赤魔/召唤次之',
+      'B180+不要在怪物房间停留，全部用魔陶石通过',
+      '三种魔陶石：石化（最强）、减少敌人、探地图。优先保留石化'
+    ]
+  },
+  {
+    id: 'deepdungeon-hoh',
+    title: '天之御柱 (HoH) 完全攻略',
+    category: 'deepdungeon',
+    icon: '🏯',
+    summary: '天之御柱（Heaven-on-High）是红莲篇的深层迷宫，B1-B100 层。比死者宫殿难度略低，B21-B30是61-70级最佳练级点。',
+    sections: [
+      { title: '与死者宫殿的区别', content: '基本系统相同但改良不少。', items: [
+        { label: '层数减少', description: '只有100层。完成B100获"孤胆英雄"称号。' },
+        { label: '魔陶石更多', description: '新增魔法解除（解DEBUFF）和运气上升（提高宝箱质量）。' },
+        { label: '黄昏之宝', description: '金宝箱出产。4个可兑换稀有宠物和坐骑。', highlight: '收藏党' }
+      ]},
+      { title: '练级推荐（61-70级）', content: 'B21-B30反复刷，每次约12-15分钟。约等于练级随机副本经验但无排队。', items: [
+        { label: '准备', description: '武器/防具强化值越高越好。组满4人效率最高。' },
+        { label: '打法', description: '速通为主，T拉一波AOE清。BOSS都很简单。' }
+      ]}
+    ],
+    tips: [
+      'B71+怪物伤害骤增，需要谨慎拉怪',
+      '坐骑奖励（白虎/赤兔马等）市场价值很高',
+      '孤胆英雄挑战建议使用绝枪战士（高减伤+自疗）'
+    ]
+  },
+  {
+    id: 'deepdungeon-eo',
+    title: '正统优雷卡 (EO) 完全攻略',
+    category: 'deepdungeon',
+    icon: '⚡',
+    summary: '正统优雷卡（Eureka Orthos）是晓月篇的深层迷宫，B1-B100 层。81级以上可进入。新增强力魔陶石，是三个深层迷宫中单人挑战最简单的。',
+    sections: [
+      { title: '新增系统', content: 'EO在HoH基础上大幅改良。', items: [
+        { label: '半神魔陶石', description: '变为半神形态，30秒内无敌+全属性大幅提升。只能携带1个。', highlight: '最强' },
+        { label: '德墨忒尔克隆体', description: '召唤NPC协助战斗5分钟。大幅降低单人难度。' },
+        { label: '装备幻化奖励', description: '正统断片兑换EO专属发光武器外观。30个兑换1个武器。', highlight: '外观党' }
+      ]},
+      { title: '练级推荐（81-90级）', content: 'B21-B30效率不错，无需排队适合DPS练级。同时获取神典石+宝箱奖励。' }
+    ],
+    tips: [
+      'EO单人挑战比前两作简单很多，推荐尝试',
+      'B81-B90恶魔墙会"缩小"技能，需打断或躲开',
+      '正统断片兑换的发光武器外观非常精美'
+    ]
+  },
+
+  // ==================== 生产采集 ====================
+  {
+    id: 'crafting-leveling',
+    title: '全生产职业 1-100 升级攻略',
+    category: 'crafting',
+    icon: '🔨',
+    summary: '8个生产职业升级路线规划。核心思路：理符任务+蛮族日常+老主顾+伊修加德重建。8个职业同步升级最省材料。',
+    sections: [
+      { title: '升级核心Buff', content: '全程保持以下加成：部队buff（制作经验+15%）、工程学指南（军票兑换，+150%经验）、休息经验槽、任意食物（+3%经验）。', items: [
+        { label: '工程学指南', description: '军票兑换的升级神器。+150%经验持续20次制作。军票多就大量换。', highlight: '必备' }
+      ]},
+      { title: '1-20级：快速起步', items: [
+        { label: '行会任务', description: '完成各职业行会初始任务，送基础装备。' },
+        { label: '配方填充', description: '所有1-15级配方各做1个。首次制作额外经验。约3-4小时8职业全20级。', highlight: '快速' }
+      ]},
+      { title: '20-80级：伊修加德重建', content: '伊修加德重建（苍穹街）是20-80级最快升级方式，无脑重复提交收藏品。', items: [
+        { label: '伊修加德重建', description: '完成3.3主线+支线"迈向苍穹"。提交指定收藏品，经验极高。', highlight: '最快' },
+        { label: '老主顾 (50+)', description: '每周12次。克莱夫/艾尔图/卡伊希尔等给大量经验+黄票/白票。', highlight: '每周必做' },
+        { label: '蛮族日常', description: '莫古力族(50)→鲶鱼精族(60)→矮人族(70)。经验+蛮族货币。' }
+      ]},
+      { title: '80-100级：7.0新内容', items: [
+        { label: '新理符', description: '图拉尔大陆的理符任务（90-100级）。大量缴纳型优先。' },
+        { label: '佩鲁佩鲁族', description: '7.0新蛮族，90级解锁。日常给大量制作经验。' },
+        { label: '收藏品', description: '90-100级收藏品提交。建议用宏一键搓HQ。' }
+      ]}
+    ],
+    tips: [
+      '8职业同步升级性价比最高：共享装备（除主副手），互相提供半成品材料',
+      '烹饪是唯一必须练满的生产职业（爆发药+食物），优先练烹饪到满级',
+      '伊修加德重建是最快升级方式但需大量材料，建议提前准备或市场板购买',
+      '老主顾每周12次不要浪费，经验+票双收益'
+    ]
+  },
+  {
+    id: 'gathering-leveling',
+    title: '全采集职业 1-100 升级攻略',
+    category: 'gathering',
+    icon: '⛏️',
+    summary: '3个采集职业升级路线。比生产简单直接：迪亚デム（50-80级最快）+ 收藏品 + 出海捕鱼。全程保持采集指南buff。',
+    sections: [
+      { title: '升级核心Buff', items: [
+        { label: '部队buff', description: '采集经验+15%。' },
+        { label: '采集指南', description: '军票兑换（+150%经验），全程保持。', highlight: '必备' },
+        { label: '食物', description: '任意加采集力食物，额外+3%经验。' }
+      ]},
+      { title: '1-50级', items: [
+        { label: '采矿/园艺', description: '按照采集笔记逐个挖。每5级换装备。' },
+        { label: '捕鱼', description: '最轻松。万能拟饵即可钓大部分鱼。海上捕鱼经验极高。', highlight: '最轻松' }
+      ]},
+      { title: '50-80级：迪亚デム时代', items: [
+        { label: '迪亚デム采集', description: '采矿/园艺最佳选择。无限采集+高经验+材料换黄票。一直挖到80级。', highlight: '最快' },
+        { label: '收藏品 (50+)', description: '提交给收藏品商人换白票+大量经验。' },
+        { label: '限时采集点', description: '传说采集点每次给大量经验。用FFXIV Clock查时间。' }
+      ]},
+      { title: '80-100级', items: [
+        { label: '7.0采集点', description: '图拉尔大陆普通采集点经验足够升到100级。' },
+        { label: '出海捕鱼', description: '海上渔船5分钟一趟，经验极高还能赚Gil。' }
+      ]}
+    ],
+    tips: [
+      '迪亚デム是采矿/园艺的练级圣地，50级后直接去挖到80级',
+      '捕鱼最快升级：出海捕鱼。5分钟一趟，经验+Gil双收',
+      '采集指南全程保持，军票不够就去做狩猎/副本随机攒'
+    ]
+  },
+  {
+    id: 'crafting-gil',
+    title: '生产赚钱完全指南',
+    category: 'crafting',
+    icon: '💎',
+    summary: '利用生产职业赚钱是FFXIV最稳定的收入来源。版本初期新式HQ装备一天轻松赚1000-5000万Gil。掌握市场节奏就能稳定致富。',
+    sections: [
+      { title: '版本赚钱节奏', items: [
+        { label: '版本初期 (x.0)', description: '新式HQ装备需求爆棚。8职业满级生产者一天轻松赚千万Gil。', highlight: '最赚钱' },
+        { label: '零式开放周', description: '爆发药+食物价格飙升3-5倍。提前囤货在开放当天卖出。' },
+        { label: '长草期 (x.5+)', description: '价格低迷。此时是囤货好时机，为新版本准备材料和Gil。' }
+      ]},
+      { title: '热门赚钱品类', items: [
+        { label: 'HQ新式战斗装备', description: '利润最高但需全套禁断生产装。投入大回报大。', highlight: '高回报' },
+        { label: 'HQ爆发药/食物', description: '零式/绝本常青需求。烹饪专精最佳。' },
+        { label: 'HQ中间材料', description: '矿石→铸锭、木材→板材。懒人税空间+50-200%。', highlight: '懒人税' },
+        { label: '房屋家具', description: '持续需求存在。部分稀有家具利润极高。' }
+      ]},
+      { title: '定价策略', items: [
+        { label: '不要踩踏压价', description: '价格战只会让所有人都赚不到钱。合理匹配最低价即可。' },
+        { label: '周末高峰', description: '周五晚到周日交易高峰，可适当提价10-20%。' },
+        { label: '跨服套利', description: '同物品不同服务器差价可达50%+。用Universalis查找机会。', highlight: '进阶' }
+      ]}
+    ],
+    tips: [
+      '生产赚钱关键是执行力——马上去做比分析更重要',
+      '烹饪+炼金+采矿+园艺是基础赚钱组合（自给自足爆发药产业链）',
+      '保留500万+流动资金应对市场机会',
+      '使用 Universalis 查看跨服价格趋势'
+    ],
+    links: [
+      { label: 'Universalis 跨服比价', url: 'https://universalis.app' },
+      { label: 'FFXIV Teamcraft', url: 'https://ffxivteamcraft.com' }
+    ]
+  },
+
+  // ==================== 海岛开拓 ====================
+  {
+    id: 'island-sanctuary',
+    title: '海岛开拓完全指南',
+    category: 'island',
+    icon: '🏝️',
+    summary: '海岛开拓是6.2推出的单人休闲内容。在私人岛屿上建造设施、饲养动物、种植作物，享受田园生活并赚取大量蓝票兑换稀有奖励。',
+    sections: [
+      { title: '解锁与基础', items: [
+        { label: '解锁条件', description: '完成6.0主线后，在拉札罕接"寻找丰饶的岛屿"。' },
+        { label: '岛屿等级', description: '通过采集/建造/制作提升。最高等级随版本开放。', highlight: '核心' },
+        { label: '工房系统', description: '设置生产日程让自由人自动生产。每2小时一轮，上限24小时。', highlight: '主要收入' }
+      ]},
+      { title: '动物饲养', items: [
+        { label: '捕捉', description: '使用捕兽网捕捉。不同时间/天气出现不同稀有动物。' },
+        { label: '稀有动物', description: '部分只在特定天气/时间出现。全收集可获得成就和称号。', highlight: '收集党' }
+      ]},
+      { title: '农作物种植', items: [
+        { label: '洒水器', description: '优先升级自动化洒水系统，省去手动浇水。' },
+        { label: '种植策略', description: '根据工房日程决定种什么。周期长的作物收益更高。' }
+      ]},
+      { title: '奖励', items: [
+        { label: '坐骑', description: '海岛摩托、海岛陆行鸟等独特坐骑。' },
+        { label: '染料', description: '绿票兑换稀有染料（纯白/纯黑等），可转卖市场板。' }
+      ]}
+    ],
+    tips: [
+      '工房日程是海岛主要收益来源。建议每天早晚各设一次日程',
+      '优先升级工房和仓库等级。其他设施按需升级',
+      '海岛是"挂机收益"系统，每天5分钟管理即可'
+    ]
+  },
+
+  // ==================== 天书奇谭 ====================
+  {
+    id: 'wondrous-tails',
+    title: '天书奇谭 (奇谭) 完全攻略',
+    category: 'wondrous',
+    icon: '📖',
+    summary: '天书奇谭是每周一次的Bingo游戏。完成指定副本获贴纸，连线获取奖励。是每周最重要的周常之一，3线奖励金色证书最有价值。',
+    sections: [
+      { title: '基础规则', items: [
+        { label: '领取', description: '每周四刷新。在伊修加德（田园郡）库洛处领取新天书。16个随机副本4×4网格。' },
+        { label: '贴纸', description: '完成指定副本获得1-9点贴纸。目标9贴纸或连线。' },
+        { label: '洗牌点数', description: '每本天书最多洗牌2次。通过完成天书副本获得洗牌点数。', highlight: '关键策略' }
+      ]},
+      { title: '最高效率策略', items: [
+        { label: '3线最优', description: '3线奖励最好（金色证书+大量MGP/神典石）。优先追求3线。', highlight: '最优' },
+        { label: '洗牌时机', description: '前7贴纸位置很差就尽早洗牌。不要第8个才洗。' },
+        { label: '速刷技巧', description: '用"解除限制"单人速刷极蛮神（贴纸1-3点）。不需要打完整副本。', highlight: '省时间' }
+      ]},
+      { title: '奖励选择', items: [
+        { label: '亚拉戈神典石', description: '1线奖励500神典石，每周最大来源之一。' },
+        { label: 'MGP', description: '2线/3线可选大量MGP，最高10万。' },
+        { label: '金色证书', description: '3线奖励。兑换稀有坐骑、宠物、魔晶石。', highlight: '终极目标' }
+      ]}
+    ],
+    tips: [
+      '每周四早上第一时间领天书，用"解除限制"单人速刷极蛮神最快',
+      '当周有"副本随机"任务时优先打练级随机（必得1贴纸）',
+      '3线后就可以停了，继续刷贴纸收益递减'
+    ]
+  },
+
+  // ==================== 更多市场策略 ====================
+  {
+    id: 'market-flipping',
+    title: '市场倒卖 (Flipping) 进阶指南',
+    category: 'market',
+    icon: '📈',
+    summary: '倒卖（低买高卖）是利用市场信息差和时间差赚钱的策略。不需要任何生产职业，只需要资金和市场洞察力。',
+    sections: [
+      { title: '倒卖原理', items: [
+        { label: '时间差', description: '周末买入（价格低），工作日卖出（供给少、价格高）。', highlight: '最简单' },
+        { label: '版本差', description: '版本末期囤热门材料，新版本开放后翻倍卖出。' },
+        { label: '跨服套利', description: '用Universalis找不同服务器差价，低价买高价卖。', highlight: '利润最高' }
+      ]},
+      { title: '适合倒卖的商品', items: [
+        { label: '魔晶石', description: '流通量极大，价格波动频繁。每个版本初期刚需。' },
+        { label: '爆发药材料', description: '每个零式/绝本版本刚需。HQ半成品懒人税空间大。' },
+        { label: '染料', description: '纯白/纯黑需求稳定，每周内价格有规律可循。' }
+      ]},
+      { title: '风险管理', items: [
+        { label: '分散投资', description: '不要把所有Gil押一种商品。改版可能血本无归。' },
+        { label: '关注PLL', description: '密切关注制作人来信和补丁说明，版本改动可能让存货一夜贬值。', highlight: '必须' }
+      ]}
+    ],
+    tips: [
+      '倒卖需要耐心。有些商品需1-2周才出手，不要着急降价',
+      'Universalis"价格历史"图表是最有用工具。学会看趋势',
+      '9个雇员×20栏位=180出货位，充分利用'
+    ],
+    links: [
+      { label: 'Universalis 跨服比价', url: 'https://universalis.app' },
+      { label: 'FFXIVMB 市场趋势', url: 'https://ff14mb.com' }
+    ]
+  },
+
+  // ==================== 房屋装修 ====================
+  {
+    id: 'housing-decorating',
+    title: '房屋装修入门指南',
+    category: 'housing',
+    icon: '🏡',
+    summary: 'FFXIV的房屋系统是最丰富的MMO房屋系统之一。从选房到装修，从浮空技巧到灯光设计，打造梦想中的家。',
+    sections: [
+      { title: '房屋获取', items: [
+        { label: '抽选系统', description: '每轮抽选9天。前往有空房的住宅区点告示板参加。每人同时只能参加1个。' },
+        { label: '公寓', description: '50万Gil永久拥有。100件家具。无需抽选。适合新人。' },
+        { label: 'S/M/L房', description: '300万/1600万/4000万。家具限制200/300/400件。', highlight: '核心区别' }
+      ]},
+      { title: '装修技巧', items: [
+        { label: '浮空技巧', description: '通过隔板和家具浮空BUG把家具放在任意高度。装修的灵魂。', highlight: '进阶必备' },
+        { label: '染色', description: '大部分家具可染色。使用家具染色剂（市场板购买或制作）。' },
+        { label: '预设模板', description: '可保存多个设计方案。切换模板需要家具有库存。' },
+        { label: '灯光设计', description: '好的灯光能彻底改变房间氛围。不要忽视。' }
+      ]},
+      { title: '省钱策略', items: [
+        { label: 'DIY制作', description: '自己采集+制作成本最低。时间投入较大。' },
+        { label: '部队工房', description: '部分家具只能用工房制作（潜水艇材料）。' },
+        { label: '季节活动', description: '活动送的家具是免费装饰资源。' }
+      ]}
+    ],
+    tips: [
+      '新手建议从公寓开始（50万Gil、100件家具），成本低压力小',
+      '装修前先画平面图或找参考设计',
+      '浮空技巧是装修灵魂——学会了天花板就不再是天花板',
+      '灯光的重要性不亚于家具本身'
+    ]
+  }
 ]
 
 export const categoryLabels: Record<string, string> = {

@@ -38,9 +38,14 @@ const filters = [
   { key:'all', icon:'📚', label:'全部' },
   { key:'fc', icon:'🏠', label:'部队' },
   { key:'market', icon:'💰', label:'市场' },
+  { key:'crafting', icon:'🔨', label:'生产' },
+  { key:'gathering', icon:'⛏️', label:'采集' },
   { key:'goldsaucer', icon:'🎰', label:'金碟' },
-  { key:'housing', icon:'🏡', label:'房屋' },
+  { key:'deepdungeon', icon:'🏚️', label:'迷宫' },
+  { key:'island', icon:'🏝️', label:'海岛' },
   { key:'weekly', icon:'📋', label:'周常' },
+  { key:'wondrous', icon:'📖', label:'天书' },
+  { key:'housing', icon:'🏡', label:'房屋' },
   { key:'gc', icon:'🪖', label:'军票' },
   { key:'retainer', icon:'👤', label:'雇员' },
   { key:'other', icon:'🌟', label:'综合' }
@@ -52,7 +57,7 @@ const filtered = computed(() => {
   if (query.value.trim()) {
     const q = query.value.toLowerCase()
     list = list.filter(g => g.title.toLowerCase().includes(q) ||
-      g.sections.some(s => s.title.toLowerCase().includes(q) || s.content.toLowerCase().includes(q)))
+      g.sections.some(s => s.title.toLowerCase().includes(q) || (s.content ?? '').toLowerCase().includes(q)))
   }
   return list
 })

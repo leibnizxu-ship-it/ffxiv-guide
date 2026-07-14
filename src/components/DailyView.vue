@@ -14,7 +14,7 @@
 
     <div v-for="(section, si) in guide.sections" :key="si" class="guide-section">
       <h3 class="section-title">{{ section.title }}</h3>
-      <p class="section-content">{{ section.content }}</p>
+      <p v-if="section.content" class="section-content">{{ section.content }}</p>
       <div v-if="section.items" class="item-grid">
         <div v-for="(item, ii) in section.items" :key="ii" class="info-card"
           :class="{ 'card-highlight': item.highlight }">

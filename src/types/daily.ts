@@ -1,4 +1,4 @@
-﻿export type DailyCategory = 'fc' | 'market' | 'goldsaucer' | 'housing' | 'weekly' | 'retainer' | 'gc' | 'other'
+﻿export type DailyCategory = 'fc' | 'market' | 'goldsaucer' | 'housing' | 'weekly' | 'retainer' | 'gc' | 'other' | 'deepdungeon' | 'crafting' | 'gathering' | 'island' | 'wondrous'
 
 export interface DailyGuide {
   id: string
@@ -13,7 +13,7 @@ export interface DailyGuide {
 
 export interface GuideSection {
   title: string
-  content: string
+  content?: string
   items?: GuideItem[]
 }
 
