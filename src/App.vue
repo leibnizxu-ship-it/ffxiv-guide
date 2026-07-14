@@ -2,7 +2,7 @@
   <div class="app">
     <header class="app-header">
       <h1 class="app-title">⚔️ FFXIV 攻略工具箱</h1>
-      <p class="app-subtitle">副本攻略 · 职业循环 · 日常指南 · 剧情故事</p>
+      <p class="app-subtitle">副本攻略 · 职业循环 · 日常指南 · 剧情故事 · 数据百科</p>
     </header>
     <nav class="app-tabs">
       <button class="tab-btn" :class="{ active: activeTab==='dungeons' }" @click="switchTab('dungeons')">🏰 副本</button>
@@ -10,6 +10,7 @@
       <button class="tab-btn" :class="{ active: activeTab==='daily' }" @click="switchTab('daily')">📖 日常</button>
       <button class="tab-btn" :class="{ active: activeTab==='story' }" @click="switchTab('story')">📜 剧情</button>
       <button class="tab-btn" :class="{ active: activeTab==='tools' }" @click="switchTab('tools')">🛠️ 工具</button>
+      <button class="tab-btn" :class="{ active: activeTab==='wiki' }" @click="switchTab('wiki')">📚 百科</button>
     </nav>
     <main class="app-main">
       <template v-if="activeTab==='dungeons'">
@@ -31,6 +32,9 @@
         <StoryList :selectedId="selectedStoryId" @select="selectStory" />
         <StoryView v-if="selectedStory" :guide="selectedStory" @back="selectedStoryId=null" />
         <div v-else class="empty-state"><div class="empty-icon">📜</div><p>选择一个篇章回顾剧情</p></div>
+      </template>
+      <template v-else-if="activeTab==='wiki'">
+        <Encyclopedia />
       </template>
       <template v-else>
         <ToolsPage />
@@ -58,6 +62,7 @@ import DailyView from '@/components/DailyView.vue'
 import StoryList from '@/components/StoryList.vue'
 import StoryView from '@/components/StoryView.vue'
 import ToolsPage from '@/components/ToolsPage.vue'
+import Encyclopedia from '@/components/Encyclopedia.vue'
 
 const activeTab = ref('dungeons')
 const selectedDungeonId = ref(null as string|null)
@@ -65,7 +70,7 @@ const selectedJobId = ref(null as string|null)
 const selectedDailyId = ref(null as string|null)
 const selectedStoryId = ref(null as string|null)
 
-type Tab = 'dungeons'|'jobs'|'daily'|'story'|'tools'
+type Tab = 'dungeons'|'jobs'|'daily'|'story'|'tools'|'wiki'
 function switchTab(tab: string) { activeTab.value = tab as Tab }
 function selectDungeon(id: string) { selectedDungeonId.value = id }
 function selectJob(id: string) { selectedJobId.value = id }
@@ -83,8 +88,8 @@ const selectedStory = computed<StoryGuide|null>(() => selectedStoryId.value ? ge
 .app-header { background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%); padding: 20px 40px; border-bottom: 2px solid var(--accent); flex-shrink: 0; }
 .app-title { font-size: 1.8rem; color: var(--accent); letter-spacing: 2px; }
 .app-subtitle { font-size: 0.88rem; color: var(--text-dim); margin-top: 4px; }
-.app-tabs { display: flex; gap: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 0 24px; flex-shrink: 0; }
-.tab-btn { padding: 12px 18px; border: none; background: transparent; color: var(--text-dim); font-size: 0.9rem; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.15s; }
+.app-tabs { display: flex; gap: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 0 24px; flex-shrink: 0; flex-wrap: wrap; }
+.tab-btn { padding: 12px 16px; border: none; background: transparent; color: var(--text-dim); font-size: 0.88rem; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.15s; white-space: nowrap; }
 .tab-btn:hover { color: var(--text); }
 .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 .app-main { flex: 1; display: flex; overflow: hidden; }
@@ -94,7 +99,7 @@ const selectedStory = computed<StoryGuide|null>(() => selectedStoryId.value ? ge
   .app-header { padding: 16px 20px; }
   .app-title { font-size: 1.3rem; }
   .app-main { flex-direction: column; }
-  .app-tabs { padding: 0 6px; flex-wrap: wrap; }
+  .app-tabs { padding: 0 6px; }
   .tab-btn { padding: 8px 10px; font-size: 0.75rem; }
 }
 </style>
